@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:truckit_customer_app/map_screen.dart';
 import 'TruckListPage.dart';
 
 void main() {
@@ -37,8 +38,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: const Column(
-      ),
+      body: MapPage(),
     );
   }
 }
