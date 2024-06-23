@@ -14,13 +14,13 @@ class _TruckListPageState extends State<TruckListPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Filters the list of trucks based on the search query and selected filters.
     List<String> filteredTrucks = trucks.where((truck) {
-      // Placeholder logic for filtering, you can replace this with your own filtering logic.
       return truck.toLowerCase().contains(searchQuery.toLowerCase()) &&
           (selectedFoodType == 'All' || truck.contains(selectedFoodType));
     }).toList();
 
-    // Sort the filtered trucks based on the selected sorting option
+    // Sorts the filtered trucks based on the selected sorting option.
     if (selectedSortOption == 'Alphabetical') {
       filteredTrucks.sort();
     } else if (selectedSortOption == 'Reverse Alphabetical') {
@@ -31,9 +31,13 @@ class _TruckListPageState extends State<TruckListPage> {
       appBar: AppBar(
         title: const Text('List of Trucks'),
         backgroundColor: const Color(0xFF1C1C1E),
+        iconTheme: IconThemeData(
+          color: Colors.grey[300], // Set the back button color to match the search button color
+        ),
       ),
       body: Column(
         children: [
+          // Search bar
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
@@ -49,12 +53,15 @@ class _TruckListPageState extends State<TruckListPage> {
               },
             ),
           ),
+          // Filter dropdowns
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: DropdownButton<String>(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  // Dropdown for selecting food type
+                  DropdownButton<String>(
                     value: selectedFoodType,
                     onChanged: (String? newValue) {
                       if (newValue != null) {
@@ -71,10 +78,9 @@ class _TruckListPageState extends State<TruckListPage> {
                       );
                     }).toList(),
                   ),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: DropdownButton<String>(
+                  SizedBox(width: 8),
+                  // Dropdown for selecting search radius
+                  DropdownButton<String>(
                     value: selectedRadius,
                     onChanged: (String? newValue) {
                       if (newValue != null) {
@@ -91,10 +97,9 @@ class _TruckListPageState extends State<TruckListPage> {
                       );
                     }).toList(),
                   ),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: DropdownButton<String>(
+                  SizedBox(width: 8),
+                  // Dropdown for selecting sort option
+                  DropdownButton<String>(
                     value: selectedSortOption,
                     onChanged: (String? newValue) {
                       if (newValue != null) {
@@ -111,10 +116,11 @@ class _TruckListPageState extends State<TruckListPage> {
                       );
                     }).toList(),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+          // List of filtered trucks
           Expanded(
             child: ListView.builder(
               itemCount: filteredTrucks.length,

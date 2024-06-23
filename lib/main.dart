@@ -6,6 +6,7 @@ void main() {
   runApp(TruckItApp());
 }
 
+/// The main entry point of the TruckIt application.
 class TruckItApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class TruckItApp extends StatelessWidget {
   }
 }
 
+/// The main page of the TruckIt application.
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: const Color(0xFF1C1C1E),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.search, color: Colors.grey[300]), // Change icon color to a lighter gray
             onPressed: () {
               Navigator.push(
                 context,
